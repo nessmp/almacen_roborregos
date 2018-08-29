@@ -1,15 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import FormDialog from './form_dialog';
+import Hidden from '@material-ui/core/Hidden';
+import PropTypes from 'prop-types';
+import React from 'react';
 import RemoveDialog from './remove_dialog';
 import ReturnDialog from './return_dialog';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+
 // Images
 // Distancia
 import ultrasonico from './images/distancia/ultrasonico.jpg';
@@ -26,21 +28,15 @@ import motor from './images/motores/motor.jpg';
 import amarillo from './images/motores/amarillo.jpg';
 import stepper from './images/motores/stepper.jpg';
 
-import Hidden from '@material-ui/core/Hidden';
+import "./styles.css"
 
 var firebase = require('firebase');
 
 const styles = {
-  card: {
-    maxWidth: 345,
-  },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
-  button: {
-    flexGrow: 1,
-  }
 };
 
 class SimpleMediaCard extends React.Component  {
@@ -64,7 +60,7 @@ class SimpleMediaCard extends React.Component  {
         <Hidden>
           <Button
             disabled={true} size="small" color="primary"
-            className={classes.button}
+            className="button"
           >
             Codigo ejemplo
           </Button>
@@ -86,7 +82,7 @@ class SimpleMediaCard extends React.Component  {
     }
     return (
       <div>
-        <Card className={classes.card}>
+        <Card className="card">
           <CardMedia
             className={classes.media}
             image={"./images/" + this.props.img + ".jpg"}

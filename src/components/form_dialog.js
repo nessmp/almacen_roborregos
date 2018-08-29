@@ -1,18 +1,17 @@
-import React from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
 
 var firebase = require('firebase');
 
 export default class FormDialog extends React.Component {
   handleClickOpen = () => {
     this.setState({ open: true });
-
   };
 
   handleClose = () => {
@@ -22,6 +21,8 @@ export default class FormDialog extends React.Component {
   handleAgregar = async () => {
     var ref = firebase.database().ref(this.props.tab + "/" + this.props.sensor);
     var numDisp;
+    // Read database to know how  many sensors are available for the requested
+    // sensor
     await ref.once('value').then((snapshot) => {
       numDisp = snapshot.val()
     });

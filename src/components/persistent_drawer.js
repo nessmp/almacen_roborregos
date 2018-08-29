@@ -322,7 +322,7 @@ class PersistentDrawer extends React.Component {
     });
     const simpleCardsArray = [];
     for (let article in articles[0]) {
-      if (article !== "nada") {
+      if (article !== "nada" && articles[0][article] > 0) {
         simpleCardsArray.push(
           <SimpleMediaCard
                 img={article}
