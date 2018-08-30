@@ -8,6 +8,8 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
 var firebase = require('firebase');
+require('firebase/auth');
+require('firebase/database');
 
 export default class FormDialog extends React.Component {
   handleClickOpen = () => {
