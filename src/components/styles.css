@@ -1,16 +1,16 @@
 .FullWidthGridDiv {
-  flexGrow: 1;
+  flex-grow: 1;
 }
 
 .card {
-  maxWidth: 345;
+  max-width: 345;
 }
 
 .media {
   height: 0;
-  paddingTop: '56.25%';
+  padding-top: '56.25%';
 }
 
 .button {
-  flexGrow: 1;
+  flex-grow: 1;
 }
