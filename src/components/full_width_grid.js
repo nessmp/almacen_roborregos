@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
+// import TextField from '@material-ui/core/TextField';
 import './styles.css'
 
 class FullWidthGrid extends React.Component {
