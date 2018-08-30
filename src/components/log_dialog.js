@@ -32,8 +32,8 @@ class LogDialog extends Component {
     const email = this.state.email;
     const password = this.state.password;
 
-    firebase.auth().
-    signInWithEmailAndPassword(email, password).then(() => {
+    firebase.auth().signInWithEmailAndPassword(
+      email, password).then(() => {
       this.handleClose();
     }).catch(function(error) {
       // TODO: Display some error to the user
