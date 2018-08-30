@@ -8,6 +8,8 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
 var firebase = require('firebase');
+require('firebase/auth');
+require('firebase/database');
 
 export default class ReturnDialog extends React.Component {
   handleClickOpen = () => {
@@ -30,50 +32,54 @@ export default class ReturnDialog extends React.Component {
       var newNumSensorUserHas = numSensorUserHas - this.state.value  < 0 ?
         0 : numSensorUserHas - this.state.value
       ref.update({
-        [this.props.sensor]: parseInt(newNumSensorUserHas)
+        [this.props.sensor]: parseInt(newNumSensorUserHas, 10)
       });
 
       // TODO: Find a more efficient way to make this.
-      var distanciaRef = firebase.database().ref("distancia/")
+      let distanciaRef = firebase.database().ref("distancia/")
       distanciaRef.once('value').then((snapshot) => {
         for (let key in snapshot.val()) {
           if (key === this.props.sensor) {
+            let num = this.state.value > numSensorUserHas ? numSensorUserHas : this.state.value
             distanciaRef.update({
-              [this.props.sensor]: parseInt(snapshot.val()[this.props.sensor]) +
-                parseInt(this.state.value)
+              [this.props.sensor]: parseInt(snapshot.val()[this.props.sensor], 10) +
+                parseInt(num, 10)
             });
           }
         }
       });
-      var displaysRef = firebase.database().ref("displays/")
+      let displaysRef = firebase.database().ref("displays/")
       displaysRef.once('value').then((snapshot) => {
         for (let key in snapshot.val()) {
           if (key === this.props.sensor) {
-            distanciaRef.update({
-              [this.props.sensor]: parseInt(snapshot.val()[this.props.sensor]) +
-                parseInt(this.state.value)
+            let num = this.state.value > numSensorUserHas ? numSensorUserHas : this.state.value
+            displaysRef.update({
+              [this.props.sensor]: parseInt(snapshot.val()[this.props.sensor], 10) +
+                parseInt(num, 10)
             });
           }
         }
       });
-      var motoresRef = firebase.database().ref("motores/")
+      let motoresRef = firebase.database().ref("motores/")
       motoresRef.once('value').then((snapshot) => {
         for (let key in snapshot.val()) {
           if (key === this.props.sensor) {
-            distanciaRef.update({
-              [this.props.sensor]: parseInt(snapshot.val()[this.props.sensor]) +
-                parseInt(this.state.value)
+            let num = this.state.value > numSensorUserHas ? numSensorUserHas : this.state.value
+            motoresRef.update({
+              [this.props.sensor]: parseInt(snapshot.val()[this.props.sensor], 10) +
+                parseInt(num, 10)
             });
           }
         }
       });
-      var temperaturaRef = firebase.database().ref("temperatura/")
+      let temperaturaRef = firebase.database().ref("temperatura/")
       await temperaturaRef.once('value').then((snapshot) => {
         for (let key in snapshot.val()) {
           if (key === this.props.sensor) {
-            distanciaRef.update({
-              [this.props.sensor]: parseInt(snapshot.val()[this.props.sensor]) +
-                parseInt(this.state.value)
+            let num = this.state.value > numSensorUserHas ? numSensorUserHas : this.state.value
+            temperaturaRef.update({
+              [this.props.sensor]: parseInt(snapshot.val()[this.props.sensor], 10) +
+                parseInt(num, 10)
             });
           }
         }
