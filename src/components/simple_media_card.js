@@ -11,26 +11,7 @@ import RemoveDialog from './remove_dialog';
 import ReturnDialog from './return_dialog';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-
-// Images
-// Distancia
-import ultrasonico from './images/distancia/ultrasonico.jpg';
-import vlx from './images/distancia/vlx.jpg';
-import sharp from './images/distancia/sharp.jpg';
-// Displays
-import lcd from './images/displays/lcd.jpg';
-import oled from './images/displays/oled.jpg';
-// Temperatura
-import mlx from './images/temperatura/mlx.jpg';
-// Motores
-import motor_mini from './images/motores/motor_mini.jpg';
-import motor from './images/motores/motor.jpg';
-import amarillo from './images/motores/amarillo.jpg';
-import stepper from './images/motores/stepper.jpg';
-
 import "./styles.css"
-
-var firebase = require('firebase');
 
 const styles = {
   media: {

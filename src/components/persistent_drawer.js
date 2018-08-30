@@ -10,9 +10,7 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -21,7 +19,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import SimpleMediaCard from './simple_media_card.js'
 import FullWidthGrid from './full_width_grid.js'
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
 import LogDialog from './log_dialog';
 
 import ListItem from '@material-ui/core/ListItem';
@@ -32,17 +29,9 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import StarIcon from '@material-ui/icons/Star';
 import SendIcon from '@material-ui/icons/Send';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ReportIcon from '@material-ui/icons/Report';
 import ViewComfyIcon from '@material-ui/icons/ViewComfy';
 
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card'
-
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
 
 import Hidden from '@material-ui/core/Hidden';
 
