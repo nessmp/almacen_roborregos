@@ -2,40 +2,40 @@
   1-SearchBox
   2-Mostrar quien tiene que
 */
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import Button from '@material-ui/core/Button';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import SimpleMediaCard from './simple_media_card.js'
+import classNames from 'classnames';
+import Divider from '@material-ui/core/Divider';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import Drawer from '@material-ui/core/Drawer';
 import FullWidthGrid from './full_width_grid.js'
-import Button from '@material-ui/core/Button';
-import LogDialog from './log_dialog';
-
+import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import StarIcon from '@material-ui/icons/Star';
+import LogDialog from './log_dialog';
+import MenuIcon from '@material-ui/icons/Menu';
+import PropTypes from 'prop-types';
+import React from 'react';
 import SendIcon from '@material-ui/icons/Send';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import SimpleMediaCard from './simple_media_card.js'
+import StarIcon from '@material-ui/icons/Star';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import ViewComfyIcon from '@material-ui/icons/ViewComfy';
-
-import Grid from '@material-ui/core/Grid';
-
-import Hidden from '@material-ui/core/Hidden';
+import { withStyles } from '@material-ui/core/styles';
+import './constFile.js'
 
 var firebase = require('firebase');
+require('firebase/auth');
+require('firebase/database');
 
 const drawerWidth = 240;
 
@@ -168,36 +168,38 @@ class PersistentDrawer extends React.Component {
      });
     const simpleCardsArray = [];
     if (tab === "todos") {
-      var ref = firebase.database().ref("/");
+      let ref = firebase.database().ref("/");
       ref.once('value').then((snapshot) => {
         Object.keys(snapshot.val()).forEach((element) => {
           if (element !== "prestados") {
-          ref = firebase.database().ref(element + "/");
-          ref.once('value').then((snapshot2) => {
-            Object.keys(snapshot2.val()).forEach((data) => {
-              simpleCardsArray.push(
-                <SimpleMediaCard
-                  img={data}
-                  availables={snapshot2.val()[data]}
-                  change={this.state.change}
-                  showSelArt={this.state.showSelectedArticles}
-                  tab={this.state.tabSelection}
-                />);
+            console.log("element", element)
+            ref = firebase.database().ref(element + "/");
+            ref.once('value').then((snapshot2) => {
+              Object.keys(snapshot2.val()).forEach((data) => {
+                simpleCardsArray.push(
+                  <SimpleMediaCard
+                    img={data}
+                    availables={snapshot2.val()[data]}
+                    change={this.state.change}
+                    cart={this.addToCart}
+                    showSelArt={this.state.showSelectedArticles}
+                    tab={element}
+                  />);
+              });
+              const GridOfSimpleCards = simpleCardsArray.map((card) => {
+                return (
+                  <Grid item xs={6} sm={3}>
+                    {card}
+                  </Grid>
+                )
+              });
+              this.setState({ GridOfSimpleCardsArray: GridOfSimpleCards });
             });
-            const GridOfSimpleCards = simpleCardsArray.map((card) => {
-              return (
-                <Grid item xs={6} sm={3}>
-                  {card}
-                </Grid>
-              )
-            });
-            this.setState({ GridOfSimpleCardsArray: GridOfSimpleCards });
-          });
           }
         });
       });
     } else {
-      var ref = firebase.database().ref(tab + "/");
+      let ref = firebase.database().ref(tab + "/");
       ref.once('value').then((snapshot) => {
         Object.keys(snapshot.val()).forEach((element) => {
           simpleCardsArray.push(
@@ -283,17 +285,17 @@ class PersistentDrawer extends React.Component {
           let numOfWantedSensors = this.state.articulos[keyArt][0]
           if (snapshot.val()[keyArt]) {
             let art = this.state.articulos;
-            art[keyArt] = [parseInt(art[keyArt]) +
-              parseInt(snapshot.val()[keyArt]), art[keyArt][1]]
+            art[keyArt] = [parseInt(art[keyArt], 10) +
+              parseInt(snapshot.val()[keyArt], 10), art[keyArt][1]]
             this.setState({ articulos: art })
           }
           postsRef.update({
-            [keyArt]: parseInt(this.state.articulos[keyArt][0]),
+            [keyArt]: parseInt(this.state.articulos[keyArt][0], 10),
           });
           refDisp = firebase.database().ref(
             this.state.articulos[keyArt][1] + "/");
           refDisp.update({
-            [keyArt]: parseInt(numDisp) - numOfWantedSensors,
+            [keyArt]: parseInt(numDisp, 10) - numOfWantedSensors,
           });
           delete this.state.articulos[keyArt]
         });
@@ -362,7 +364,7 @@ class PersistentDrawer extends React.Component {
     this.handleRegresarClick = this.handleRegresarClick.bind(this);
   }
 
-  render() {0
+  render() {
     const { classes, theme } = this.props;
     const { anchor, open } = this.state;
     let addButton;
