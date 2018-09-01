@@ -17,7 +17,7 @@ export default class RemoveDialog extends React.Component {
   };
 
   handleQuitar = () => {
-    if (this.state.value >= 0) {
+    if (this.state.value > 0) {
       this.props.cart(this.props.sensor, this.state.value)
       this.setState({ open: false });
     }
