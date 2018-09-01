@@ -24,7 +24,7 @@ export default class RemoveDialog extends React.Component {
   };
 
   setValue(event) {
-    this.setState({ value: event.target.value })
+    this.setState({ value: Math.floor(event.target.value) })
   }
 
   constructor(props){

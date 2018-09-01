@@ -21,7 +21,7 @@ export default class ReturnDialog extends React.Component {
   };
 
   async handleReturn() {
-    if (this.state.value >= 0) {
+    if (this.state.value > 0) {
       var user = firebase.auth().currentUser
       var ref = firebase.database().ref(
         "prestados/" + user.uid)
@@ -90,7 +90,7 @@ export default class ReturnDialog extends React.Component {
   };
 
   setValue(event) {
-    this.setState({ value: event.target.value })
+    this.setState({ value: Math.floor(event.target.value) })
   }
 
   constructor(props){
