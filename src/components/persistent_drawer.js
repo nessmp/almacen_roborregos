@@ -172,7 +172,6 @@ class PersistentDrawer extends React.Component {
       ref.once('value').then((snapshot) => {
         Object.keys(snapshot.val()).forEach((element) => {
           if (element !== "prestados") {
-            console.log("element", element)
             ref = firebase.database().ref(element + "/");
             ref.once('value').then((snapshot2) => {
               Object.keys(snapshot2.val()).forEach((data) => {
@@ -271,8 +270,14 @@ class PersistentDrawer extends React.Component {
     var user = firebase.auth().currentUser
     var db = firebase.database();
     var ref = db.ref("prestados");
+    await ref.once('value').then((snapshot) => {
+      if (!snapshot.hasChild(user.uid)) {
+        ref.child(user.uid).set({
+          nada: 0,
+        });
+      }
+    });
     var postsRef = ref.child(user.uid);
-
     for (let keyArt in this.state.articulos) {
       var refDisp = firebase.database().ref(
         this.state.articulos[keyArt][1] + "/" + keyArt);
