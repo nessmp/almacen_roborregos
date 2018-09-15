@@ -3,6 +3,8 @@
   2-Mostrar quien tiene que
 */
 import AppBar from '@material-ui/core/AppBar';
+import AcUnit from '@material-ui/icons/AcUnit';
+import BatteryChargingFull from '@material-ui/core/BatteryChargingFull';
 import Button from '@material-ui/core/Button';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -21,12 +23,14 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import LogDialog from './log_dialog';
 import MenuIcon from '@material-ui/icons/Menu';
+import Motorcycle from '@material-ui/icons/Motorcycle'
 import PropTypes from 'prop-types';
 import React from 'react';
+import RotateRight from '@material-ui/icons/RotateRight';
 import SendIcon from '@material-ui/icons/Send';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SimpleMediaCard from './simple_media_card.js'
-import StarIcon from '@material-ui/icons/Star';
+import Straighten from '@material-ui/icons/Straighten';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import ViewComfyIcon from '@material-ui/icons/ViewComfy';
@@ -441,7 +445,7 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("distancia")}>
                   <ListItemIcon>
-                    <InboxIcon />
+                    <Straighten />
                   </ListItemIcon>
                   <ListItemText
                      primary="Distancia"
@@ -449,26 +453,74 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("motores")}>
                   <ListItemIcon>
-                    <StarIcon />
+                    <Motorcycle />
                   </ListItemIcon>
                   <ListItemText
                      primary="Motores"
                    />
                 </ListItem>
+                <ListItem button onClick={() => this.handleTabClick("servo motores")}>
+                  <ListItemIcon>
+                    <RotateRight />
+                  </ListItemIcon>
+                  <ListItemText
+                     primary="Servo Motores"
+                   />
+                </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("temperatura")}>
                   <ListItemIcon>
-                    <SendIcon />
+                    <AcUnit />
                   </ListItemIcon>
                   <ListItemText
                     primary="Temperatura"
                    />
                 </ListItem>
-                <ListItem button onClick={() => this.handleTabClick("displays")}>
+                <ListItem button onClick={() => this.handleTabClick("arduinos")}>
+                  <ListItemIcon>
+                    <SendIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Arduinos"
+                   />
+                </ListItem>
+                <ListItem button onClick={() => this.handleTabClick("mecanica")}>
                   <ListItemIcon>
                     <DraftsIcon />
                   </ListItemIcon>
                   <ListItemText
-                     primary="Displays"
+                     primary="Mecanica"
+                   />
+                </ListItem>
+                <ListItem button onClick={() => this.handleTabClick("camaras")}>
+                  <ListItemIcon>
+                    <DraftsIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                     primary="Camaras"
+                   />
+                </ListItem>
+                <ListItem button onClick={() => this.handleTabClick("imu")}>
+                  <ListItemIcon>
+                    <DraftsIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                     primary="IMU"
+                   />
+                </ListItem>
+                <ListItem button onClick={() => this.handleTabClick("varios")}>
+                  <ListItemIcon>
+                    <DraftsIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                     primary="Varios"
+                   />
+                </ListItem>
+                <ListItem button onClick={() => this.handleTabClick("electronica")}>
+                  <ListItemIcon>
+                    <BatteryChargingFull />
+                  </ListItemIcon>
+                  <ListItemText
+                     primary="Electronica"
                    />
                 </ListItem>
               </div>
