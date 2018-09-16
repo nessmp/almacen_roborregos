@@ -466,12 +466,12 @@ class PersistentDrawer extends React.Component {
                     primary="Temperatura"
                    />
                 </ListItem>
-                <ListItem button onClick={() => this.handleTabClick("arduinos")}>
+                <ListItem button onClick={() => this.handleTabClick("micros")}>
                   <ListItemIcon>
                     <MaterialIcon icon="fiber_pin" />
                   </ListItemIcon>
                   <ListItemText
-                    primary="Arduinos"
+                    primary="Micros"
                    />
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("mecanica")}>
@@ -512,6 +512,14 @@ class PersistentDrawer extends React.Component {
                   </ListItemIcon>
                   <ListItemText
                      primary="Electronica"
+                   />
+                </ListItem>
+                <ListItem button onClick={() => this.handleTabClick("drivers")}>
+                  <ListItemIcon>
+                    <MaterialIcon icon="power_input" />
+                  </ListItemIcon>
+                  <ListItemText
+                     primary="Drivers"
                    />
                 </ListItem>
               </div>
