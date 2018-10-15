@@ -20,6 +20,14 @@ const styles = {
   },
 };
 
+function importAll(r) {
+  let images = {};
+  r.keys().forEach(function (item, index) { images[item.replace('./', '')] = r(item); });
+  return images;
+}
+
+const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
+
 class SimpleMediaCard extends React.Component  {
   render() {
     const { classes } = this.props
@@ -66,7 +74,7 @@ class SimpleMediaCard extends React.Component  {
         <Card className="card">
           <CardMedia
             className={classes.media}
-            image={"./images/" + this.props.img + ".jpg"}
+            image={images[this.props.img + ".jpg"]}
             title="Ultrasonico"
           />
           <CardContent>

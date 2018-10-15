@@ -62,6 +62,7 @@ const Articulos = {
     "USB Bluetooth Dongle": "varios",
     "RGB Sensor TCS34725": "varios",
     "XY FST": "varios",
+    "HM R": "varios",
     "TSOP": "varios",
     "Switches": "electronica",
     "Potenciometros": "electronica",

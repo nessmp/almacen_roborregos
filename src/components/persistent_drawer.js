@@ -272,11 +272,11 @@ class PersistentDrawer extends React.Component {
         });
       }
     });
-    var postsRef = ref.child(user.uid);
+    let postsRef = ref.child(user.uid);
     for (let keyArt in this.state.articulos) {
-      var refDisp = firebase.database().ref(
+      let refDisp = firebase.database().ref(
         this.state.articulos[keyArt][1] + "/" + keyArt);
-      var numDisp;
+      let numDisp;
       await refDisp.once('value').then((num) => {
         numDisp = num.val()
       });
