@@ -7,7 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
-var firebase = require('firebase');
+var firebase = require('firebase/app');
 require('firebase/auth');
 require('firebase/database');
 
