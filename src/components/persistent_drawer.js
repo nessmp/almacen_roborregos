@@ -28,7 +28,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import './constFile.js'
 
-var firebase = require('firebase');
+var firebase = require('firebase/app');
 require('firebase/auth');
 require('firebase/database');
 

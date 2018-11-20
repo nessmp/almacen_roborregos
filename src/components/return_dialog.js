@@ -8,7 +8,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Articulos from "./constFile";
 
-var firebase = require('firebase');
+var firebase = require('firebase/app');
 require('firebase/auth');
 require('firebase/database');
 
