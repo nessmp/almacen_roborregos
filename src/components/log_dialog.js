@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 
 class LogDialog extends Component {
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({ open: true, display_failed_message: "none" });
   };
 
   handleClose() {
@@ -35,8 +35,8 @@ class LogDialog extends Component {
     firebase.auth().signInWithEmailAndPassword(
       email, password).then(() => {
       this.handleClose();
-    }).catch(function(error) {
-      // TODO: Display some error to the user
+    }).catch((error) => {
+      this.setState({ display_failed_message: 'block'});
     });
   }
 
@@ -55,6 +55,7 @@ class LogDialog extends Component {
       email: '',
       password: '',
       open: false,
+      display_failed_message: 'none'
     };
 
     this.logout = this.logout.bind(this);
@@ -91,6 +92,7 @@ class LogDialog extends Component {
         >
           <DialogTitle id="form-dialog-title">LogIn</DialogTitle>
           <DialogContent>
+            <p style={{display: this.state.display_failed_message, color:'red'}}> Incorrect email or password </p>
             <TextField
               autoFocus
               margin="dense"
