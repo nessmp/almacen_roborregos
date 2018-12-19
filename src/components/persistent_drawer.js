@@ -338,6 +338,46 @@ class PersistentDrawer extends React.Component {
      });
   }
 
+  handleBuscarClick() {
+    let ref = firebase.database().ref("prestados/");
+      ref.once('value').then((snapshot) => {
+        let lent_articles = {};
+        Object.entries(snapshot.val()).forEach(
+          ([name, value]) => {
+            Object.entries(value).forEach(
+              ([sensor, cant]) => {
+                if (cant !== 0) {
+                  if (lent_articles.hasOwnProperty(name)) {
+                    lent_articles[sensor][name] = cant
+                  } else {
+                    lent_articles[sensor] = {}
+                    lent_articles[sensor][name] = cant
+                  }
+                }
+              }
+            );
+          }
+        );
+        const simpleCardsArray = []
+        Object.keys(lent_articles).forEach((element) => {
+          simpleCardsArray.push(
+            <SimpleMediaCard
+              img={element}
+              list={lent_articles[element]}
+              showList={true}
+            />);
+        });
+        const GridOfSimpleCards = simpleCardsArray.map((card) => {
+          return (
+            <Grid item xs={6} sm={3}>
+              {card}
+            </Grid>
+          )
+        });
+        this.setState({ GridOfSimpleCardsArray: GridOfSimpleCards });
+      });
+  }
+
   constructor(props){
     super(props);
 
@@ -362,6 +402,7 @@ class PersistentDrawer extends React.Component {
     this.handleSelectArticlesClick = this.handleSelectArticlesClick.bind(this);
     this.handleApartarClick = this.handleApartarClick.bind(this);
     this.handleRegresarClick = this.handleRegresarClick.bind(this);
+    this.handleBuscarClick = this.handleBuscarClick.bind(this);
   }
 
   render() {
@@ -538,6 +579,12 @@ class PersistentDrawer extends React.Component {
                     <MaterialIcon icon="inbox" />
                   </ListItemIcon>
                   <ListItemText primary="Regresar articulos" />
+                </ListItem>
+                <ListItem button onClick={this.handleBuscarClick}>
+                  <ListItemIcon>
+                    <MaterialIcon icon="inbox" />
+                  </ListItemIcon>
+                  <ListItemText primary="Buscar Articulo" />
                 </ListItem>
               </div>
             </List>
