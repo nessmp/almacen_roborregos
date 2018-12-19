@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import RemoveDialog from './remove_dialog';
 import ReturnDialog from './return_dialog';
+import ListDialog from './list_dialog';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import "./styles.css"
@@ -22,7 +23,7 @@ const styles = {
 
 function importAll(r) {
   let images = {};
-  r.keys().forEach(function (item, index) { images[item.replace('./', '')] = r(item); });
+  r.keys().forEach(function (item) { images[item.replace('./', '')] = r(item); });
   return images;
 }
 
@@ -44,6 +45,11 @@ class SimpleMediaCard extends React.Component  {
           sensor={this.props.img}
           updateCards={this.props.updateCards}
         />
+    } else if (this.props.showList) {
+      Buttons =
+      <ListDialog
+        list={this.props.list}
+      />
     } else {
       Buttons =
         <Hidden>
@@ -66,6 +72,8 @@ class SimpleMediaCard extends React.Component  {
       message = "Numero de articulos seleccionados: "
     else if (this.props.showReturn) {
       message = "Numero de articulos que tienes: "
+    } else if (this.props.showList) {
+      message = ""
     } else {
       message ="Articulos disponibles: "
     }
