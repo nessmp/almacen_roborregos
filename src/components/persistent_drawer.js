@@ -265,14 +265,16 @@ class PersistentDrawer extends React.Component {
     var user = firebase.auth().currentUser
     var db = firebase.database();
     var ref = db.ref("prestados");
+    let email = user.email.split('@')
+    let name = email[0] + " " + email[1].replace('.com', '')
     await ref.once('value').then((snapshot) => {
-      if (!snapshot.hasChild(user.uid)) {
-        ref.child(user.uid).set({
+      if (!snapshot.hasChild(name)) {
+        ref.child(name).set({
           nada: 0,
         });
       }
     });
-    let postsRef = ref.child(user.uid);
+    let postsRef = ref.child(name);
     for (let keyArt in this.state.articulos) {
       let refDisp = firebase.database().ref(
         this.state.articulos[keyArt][1] + "/" + keyArt);
@@ -301,12 +303,19 @@ class PersistentDrawer extends React.Component {
         });
       }
     }
+    ref.once('value').then((snapshot) => {
+      let dict =  snapshot.val()[name]
+      delete dict.nada
+      ref.child(name).set(dict);
+    });
     this.handleSelectArticlesClick()
   }
 
   async handleRegresarClick() {
     var user = firebase.auth().currentUser
-    var ref = firebase.database().ref("prestados/" + user.uid);
+    let email = user.email.split('@')
+    let name = email[0] + " " + email[1].replace('.com', '')
+    var ref = firebase.database().ref("prestados/" + name);
     var articles = []
     await ref.once('value').then((snapshot) => {
       articles.push(snapshot.val());

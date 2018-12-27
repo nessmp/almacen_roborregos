@@ -24,8 +24,10 @@ export default class ReturnDialog extends React.Component {
   async handleReturn() {
     if (this.state.value > 0) {
       var user = firebase.auth().currentUser
+      let email = user.email.split('@')
+      let name = email[0] + " " + email[1].replace('.com', '')
       var ref = firebase.database().ref(
-        "prestados/" + user.uid)
+        "prestados/" + name)
       var numSensorUserHas = 0
       await ref.once('value').then((num) => {
         numSensorUserHas = num.val()[this.props.sensor]
@@ -47,6 +49,15 @@ export default class ReturnDialog extends React.Component {
             });
           }
         }
+      });
+      ref.once('value').then((snapshot) => {
+        let dict =  snapshot.val()
+        for (var propName in dict) { 
+          if (dict[propName] === 0) {
+            delete dict[propName];
+          }
+        }
+        ref.set(dict);
       });
       this.setState({ open: false });
       this.props.updateCards()
