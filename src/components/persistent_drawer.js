@@ -143,8 +143,10 @@ class PersistentDrawer extends React.Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        let email = user.email.split('@')
+        let name = email[0] + " " + email[1].replace('.com', '')
         this.setState({
-          message: "Bienvenido " + user.email,
+          message: "Bienvenido " + name,
           userLogedin: true
          })
       } else {
