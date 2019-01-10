@@ -126,7 +126,12 @@ class CustomTable extends React.Component {
     let rows = []
     Object.entries(list).forEach(
       ([key, value]) => {
-        rows.push(createData(key, value.toString()))
+        // TODO: buscar una mejor manera de hacer esto
+        if (value.constructor === Array) {
+          rows.push(createData(key, value[0].toString()))
+        } else {
+          rows.push(createData(key, value.toString()))
+        }
       }
     );
     return rows;
