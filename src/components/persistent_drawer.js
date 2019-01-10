@@ -1,9 +1,7 @@
 /*
   1-SearchBox
-  2-Mostrar quien tiene que
 */
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import classNames from 'classnames';
@@ -18,6 +16,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import LogDialog from './log_dialog';
+import ApartarLog from './apartar_log';
 import MaterialIcon from 'material-icons-react';
 import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
@@ -263,55 +262,55 @@ class PersistentDrawer extends React.Component {
      });
   }
 
-  async handleApartarClick() {
-    var user = firebase.auth().currentUser
-    var db = firebase.database();
-    var ref = db.ref("prestados");
-    let email = user.email.split('@')
-    let name = email[0] + " " + email[1].replace('.com', '')
-    await ref.once('value').then((snapshot) => {
-      if (!snapshot.hasChild(name)) {
-        ref.child(name).set({
-          nada: 0,
-        });
-      }
-    });
-    let postsRef = ref.child(name);
-    for (let keyArt in this.state.articulos) {
-      let refDisp = firebase.database().ref(
-        this.state.articulos[keyArt][1] + "/" + keyArt);
-      let numDisp;
-      await refDisp.once('value').then((num) => {
-        numDisp = num.val()
-      });
-      if (numDisp >= this.state.articulos[keyArt][0]) {
-        await postsRef.once('value').then((snapshot) => {
-          let numOfWantedSensors = this.state.articulos[keyArt][0]
-          if (snapshot.val()[keyArt]) {
-            let art = this.state.articulos;
-            art[keyArt] = [parseInt(art[keyArt], 10) +
-              parseInt(snapshot.val()[keyArt], 10), art[keyArt][1]]
-            this.setState({ articulos: art })
-          }
-          postsRef.update({
-            [keyArt]: parseInt(this.state.articulos[keyArt][0], 10),
-          });
-          refDisp = firebase.database().ref(
-            this.state.articulos[keyArt][1] + "/");
-          refDisp.update({
-            [keyArt]: parseInt(numDisp, 10) - numOfWantedSensors,
-          });
-          delete this.state.articulos[keyArt]
-        });
-      }
-    }
-    ref.once('value').then((snapshot) => {
-      let dict =  snapshot.val()[name]
-      delete dict.nada
-      ref.child(name).set(dict);
-    });
-    this.handleSelectArticlesClick()
-  }
+  // async handleApartarClick() {
+  //   var user = firebase.auth().currentUser
+  //   var db = firebase.database();
+  //   var ref = db.ref("prestados");
+  //   let email = user.email.split('@')
+  //   let name = email[0] + " " + email[1].replace('.com', '')
+  //   await ref.once('value').then((snapshot) => {
+  //     if (!snapshot.hasChild(name)) {
+  //       ref.child(name).set({
+  //         nada: 0,
+  //       });
+  //     }
+  //   });
+  //   let postsRef = ref.child(name);
+  //   for (let keyArt in this.state.articulos) {
+  //     let refDisp = firebase.database().ref(
+  //       this.state.articulos[keyArt][1] + "/" + keyArt);
+  //     let numDisp;
+  //     await refDisp.once('value').then((num) => {
+  //       numDisp = num.val()
+  //     });
+  //     if (numDisp >= this.state.articulos[keyArt][0]) {
+  //       await postsRef.once('value').then((snapshot) => {
+  //         let numOfWantedSensors = this.state.articulos[keyArt][0]
+  //         if (snapshot.val()[keyArt]) {
+  //           let art = this.state.articulos;
+  //           art[keyArt] = [parseInt(art[keyArt], 10) +
+  //             parseInt(snapshot.val()[keyArt], 10), art[keyArt][1]]
+  //           this.setState({ articulos: art })
+  //         }
+  //         postsRef.update({
+  //           [keyArt]: parseInt(this.state.articulos[keyArt][0], 10),
+  //         });
+  //         refDisp = firebase.database().ref(
+  //           this.state.articulos[keyArt][1] + "/");
+  //         refDisp.update({
+  //           [keyArt]: parseInt(numDisp, 10) - numOfWantedSensors,
+  //         });
+  //         delete this.state.articulos[keyArt]
+  //       });
+  //     }
+  //   }
+  //   ref.once('value').then((snapshot) => {
+  //     let dict =  snapshot.val()[name]
+  //     delete dict.nada
+  //     ref.child(name).set(dict);
+  //   });
+  //   this.handleSelectArticlesClick()
+  // }
 
   async handleRegresarClick() {
     var user = firebase.auth().currentUser
@@ -411,7 +410,7 @@ class PersistentDrawer extends React.Component {
     this.addToCart = this.addToCart.bind(this);
     this.removeFromCart = this.removeFromCart.bind(this);
     this.handleSelectArticlesClick = this.handleSelectArticlesClick.bind(this);
-    this.handleApartarClick = this.handleApartarClick.bind(this);
+    // this.handleApartarClick = this.handleApartarClick.bind(this);
     this.handleRegresarClick = this.handleRegresarClick.bind(this);
     this.handleBuscarClick = this.handleBuscarClick.bind(this);
   }
@@ -422,14 +421,18 @@ class PersistentDrawer extends React.Component {
     let addButton;
     if (this.state.showSelectedArticles && this.state.userLogedin) {
       addButton =
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={this.handleApartarClick}
-        >
-          Apartar
-        </Button>;
+      <ApartarLog 
+        articulos={this.state.articulos}
+        selArt={this.handleSelectArticlesClick} 
+      />
+        // <Button
+        //   variant="contained"
+        //   color="primary"
+        //   className={classes.button}
+        //   onClick={this.handleApartarClick}
+        // >
+        //   Apartar
+        // </Button>;
     } else {
       addButton =
         <Hidden xsUp>
