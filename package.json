@@ -7,6 +7,7 @@
     "@material-ui/icons": "^2.0.2",
     "contentful": "^7.0.6",
     "firebase": "^5.7.3",
+    "material-icons-react": "^1.0.4",
     "material-ui-search-bar-enhanced": "^0.5.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -18,5 +19,18 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "description": "Warehouse of robotics team RoBorregos - ITESM. Hosted [here](https://nessmp.github.io/)",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nessmp/almacen_roborregos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nessmp/almacen_roborregos/issues"
+  },
+  "homepage": "https://github.com/nessmp/almacen_roborregos#readme"
 }

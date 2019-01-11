@@ -2,8 +2,10 @@
   1-SearchBox
 */
 import AppBar from '@material-ui/core/AppBar';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import {AcUnit, BatteryChargingFull, CameraAlt, ChevronLeft, ChevronRight,
+  Edit, FiberPin, GpsFixed, HowToReg, Inbox, Menu, Motorcycle, PowerInput,
+  RotateRight, ShoppingCart, Straighten, ViewComfy, Widgets} 
+  from '@material-ui/icons';
 import classNames from 'classnames';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
@@ -17,8 +19,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import LogDialog from './log_dialog';
 import ApartarLog from './apartar_log';
-import MaterialIcon from 'material-icons-react';
-import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SimpleMediaCard from './simple_media_card.js'
@@ -395,7 +395,7 @@ class PersistentDrawer extends React.Component {
                 onClick={this.handleDrawerOpen}
                 className={classNames(classes.menuButton, open && classes.hide)}
               >
-                <MenuIcon />
+                <Menu />
               </IconButton>
               <Typography
                 variant="title" color="inherit" className={classes.flex}
@@ -416,7 +416,7 @@ class PersistentDrawer extends React.Component {
             <div className={classes.drawerHeader}>
               <IconButton onClick={this.handleDrawerClose}>
                 {theme.direction === 'rtl' ?
-                  <ChevronRightIcon /> : <ChevronLeftIcon />}
+                  <ChevronRight /> : <ChevronLeft />}
               </IconButton>
             </div>
             <Divider />
@@ -424,7 +424,7 @@ class PersistentDrawer extends React.Component {
               <div>
                 <ListItem button onClick={() => this.handleTabClick("todos")}>
                   <ListItemIcon>
-                    <MaterialIcon icon="view_comfy" />
+                    <ViewComfy />
                   </ListItemIcon>
                   <ListItemText
                      primary="Todos"
@@ -432,7 +432,7 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("distancia")}>
                   <ListItemIcon>
-                    <MaterialIcon icon="straighten" />
+                    <Straighten />
                   </ListItemIcon>
                   <ListItemText
                      primary="Distancia"
@@ -440,7 +440,7 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("motores")}>
                   <ListItemIcon>
-                    <MaterialIcon icon="motorcycle" />
+                    <Motorcycle />
                   </ListItemIcon>
                   <ListItemText
                      primary="Motores"
@@ -448,7 +448,7 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("servo motores")}>
                   <ListItemIcon>
-                    <MaterialIcon icon="rotate_right" />
+                    <RotateRight />
                   </ListItemIcon>
                   <ListItemText
                      primary="Servo Motores"
@@ -456,7 +456,7 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("temperatura")}>
                   <ListItemIcon>
-                  <MaterialIcon icon="ac_unit" />
+                  <AcUnit />
                   </ListItemIcon>
                   <ListItemText
                     primary="Temperatura"
@@ -464,7 +464,7 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("micros")}>
                   <ListItemIcon>
-                    <MaterialIcon icon="fiber_pin" />
+                    <FiberPin />
                   </ListItemIcon>
                   <ListItemText
                     primary="Micros"
@@ -472,7 +472,7 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("mecanica")}>
                   <ListItemIcon>
-                    <MaterialIcon icon="edit" />
+                    <Edit />
                   </ListItemIcon>
                   <ListItemText
                      primary="Mecanica"
@@ -480,7 +480,7 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("camaras")}>
                   <ListItemIcon>
-                    <MaterialIcon icon="camera_alt" />
+                    <CameraAlt />
                   </ListItemIcon>
                   <ListItemText
                      primary="Camaras"
@@ -488,7 +488,7 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("imu")}>
                   <ListItemIcon>
-                    <MaterialIcon icon="gps_fixed" />
+                    <GpsFixed />
                   </ListItemIcon>
                   <ListItemText
                      primary="IMU"
@@ -496,7 +496,7 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("varios")}>
                   <ListItemIcon>
-                    <MaterialIcon icon="widgets" />
+                    <Widgets />
                   </ListItemIcon>
                   <ListItemText
                      primary="Varios"
@@ -504,7 +504,7 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("electronica")}>
                   <ListItemIcon>
-                    <MaterialIcon icon="battery_charging_full" />
+                    <BatteryChargingFull />
                   </ListItemIcon>
                   <ListItemText
                      primary="Electronica"
@@ -512,7 +512,7 @@ class PersistentDrawer extends React.Component {
                 </ListItem>
                 <ListItem button onClick={() => this.handleTabClick("drivers")}>
                   <ListItemIcon>
-                    <MaterialIcon icon="power_input" />
+                    <PowerInput />
                   </ListItemIcon>
                   <ListItemText
                      primary="Drivers"
@@ -525,19 +525,19 @@ class PersistentDrawer extends React.Component {
               <div>
                 <ListItem button onClick={this.handleSelectArticlesClick}>
                   <ListItemIcon>
-                    <MaterialIcon icon="shopping_cart" />
+                    <ShoppingCart />
                   </ListItemIcon>
                   <ListItemText primary="Articulos Seleccionados" />
                 </ListItem>
                 <ListItem button onClick={this.handleRegresarClick}>
                   <ListItemIcon>
-                    <MaterialIcon icon="inbox" />
+                    <Inbox />
                   </ListItemIcon>
                   <ListItemText primary="Regresar articulos" />
                 </ListItem>
                 <ListItem button onClick={this.handleBuscarClick}>
                   <ListItemIcon>
-                    <MaterialIcon icon="inbox" />
+                    <HowToReg />
                   </ListItemIcon>
                   <ListItemText primary="Buscar Articulo" />
                 </ListItem>
