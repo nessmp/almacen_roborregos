@@ -18,9 +18,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import LogDialog from './log_dialog';
-import ApartarLog from './apartar_log';
 import PropTypes from 'prop-types';
 import React from 'react';
+import ReserveDialog from './reserve_dialog';
 import SimpleMediaCard from './simple_media_card.js'
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -370,7 +370,7 @@ class PersistentDrawer extends React.Component {
     let addButton;
     if (this.state.showSelectedArticles && this.state.userLogedin) {
       addButton =
-      <ApartarLog 
+      <ReserveDialog 
         articulos={this.state.articulos}
         selArt={this.handleSelectArticlesClick} 
       />
