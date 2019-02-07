@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import FormDialog from './form_dialog';
+import AddToCartDialog from './add_to_cart_dialog';
 import Hidden from '@material-ui/core/Hidden';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -12,26 +12,20 @@ import ReturnDialog from './return_dialog';
 import ListDialog from './list_dialog';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import "./styles.css"
+import Styles from './styles.js'
 
-const styles = {
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-};
-
-function importAll(r) {
+function importAllImages(r) {
   let images = {};
   r.keys().forEach(function (item) { images[item.replace('./', '')] = r(item); });
   return images;
 }
 
-const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
+const images = importAllImages(require.context('./images', false, /\.(png|jpe?g|svg)$/));
 
 class SimpleMediaCard extends React.Component  {
   render() {
     const { classes } = this.props
+    // The buttons on the card will change depending on what the user want to do
     let Buttons;
     if (this.props.showSelArt) {
       Buttons =
@@ -59,7 +53,7 @@ class SimpleMediaCard extends React.Component  {
           >
             Codigo ejemplo
           </Button>
-          <FormDialog
+          <AddToCartDialog
             disp={this.props.availables}
             sensor={this.props.img}
             cart={this.props.cart}
@@ -67,6 +61,8 @@ class SimpleMediaCard extends React.Component  {
           />
         </Hidden>
     }
+
+    // The text on the card will change depending on what the user want to do
     var message
     if (this.props.showSelArt)
       message = "Numero de articulos seleccionados: "
@@ -77,13 +73,14 @@ class SimpleMediaCard extends React.Component  {
     } else {
       message ="Articulos disponibles: "
     }
+
     return (
       <div>
         <Card className="card">
           <CardMedia
             className={classes.media}
             image={images[this.props.img + ".jpg"]}
-            title="Ultrasonico"
+            title={this.props.img}
           />
           <CardContent>
             <Typography gutterBottom variant="headline" component="h2">
@@ -106,4 +103,4 @@ SimpleMediaCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleMediaCard);
+export default withStyles(Styles)(SimpleMediaCard);
