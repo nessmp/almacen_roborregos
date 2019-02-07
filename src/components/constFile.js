@@ -55,6 +55,7 @@ const Articulos = {
     "Cable Ethernet": "varios",
     "Matriz Leds 8x8": "varios",
     "LCD 16x2 sin I2C": "varios",
+    "LCD 16x2 con I2C": "varios",
     "Joystick": "varios",
     "gy gps6mv2": "varios",
     "Pelota Infraroja": "varios",
@@ -89,6 +90,10 @@ const Articulos = {
     "Driver L298N": "drivers",
     "Motor Shield Seed Studio": "drivers",
     "Adafruit Motor Shield v2": "drivers",
+    "CD4051BE" : "electronica",
+    "Limit Switch" : "electronica",
+    "L293D" : "electronica",
+    "Modulo I2C" : "electronica",
 }
 
 export default Articulos
