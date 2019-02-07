@@ -41,11 +41,7 @@ class LogDialog extends Component {
   }
 
   logout() {
-    firebase.auth().signOut().then(() => {
-      // TODO: Handle everything fine
-    }).catch(function(error) {
-      // TODO: handle the error
-    });
+    firebase.auth().signOut()
   }
 
   constructor(props){
